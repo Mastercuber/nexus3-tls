@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  nexus-tls:
+    image: avensio/nexus3-tls
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nexus-tls
+    restart: always
+    networks:
+      - 'nexus'
+    volumes:
+      - 'nexus-data:/nexus-data'
+    ports:
+      - '8081:8081'
+      - '8082:8082'
+      - '8083:8083'
+      - '8084:8084'
+      - '8443:8443'
+      - '2480:2480'
+volumes:
+  nexus-data: {}
+networks:
+  nexus:
+    external: true
+    driver: 'host'
